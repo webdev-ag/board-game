@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Display: inline vs. block</title>
+    <style>
+        .example-container {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 2px solid #ccc;
+        }
+
+        .box {
+            background-color: lightblue;
+            padding: 0.5rem;
+            margin: 0.25rem;
+            border: 1px solid #000;
+        }
+
+        /* überschreibt das Standardverhalten */
+        .block {
+            display: block;
+        }
+
+        .inline {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Beispiel 1 – Standardverhalten von <code>&lt;a&gt;</code> (inline)</h2>
+    <div class="example-container">
+        <a href="#" class="box">Link 1</a>
+        <a href="#" class="box">Link 2</a>
+        <a href="#" class="box">Link 3</a>
+    </div>
+
+    <h2>Beispiel 2 – <code>&lt;a&gt;</code> mit <code>display: block</code></h2>
+    <div class="example-container">
+        <a href="#" class="box block">Link 1</a>
+        <a href="#" class="box block">Link 2</a>
+        <a href="#" class="box block">Link 3</a>
+    </div>
+
+    <h2>Beispiel 3 – Standardverhalten von <code>&lt;div&gt;</code> (block)</h2>
+    <div class="example-container">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+
+    <h2>Beispiel 4 – <code>&lt;div&gt;</code> mit <code>display: inline</code></h2>
+    <div class="example-container">
+        <div class="box inline">Box 1</div>
+        <div class="box inline">Box 2</div>
+        <div class="box inline">Box 3</div>
+    </div>
+
+</body>
+
+</html>
