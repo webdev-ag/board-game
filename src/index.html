@@ -28,7 +28,7 @@
         }
 
         .hero {
-            background-color: rgb(255 0 0 / .5);
+            background-color: rgb(255 0 0 / .75);
             /* background-image: url(./images/hero-m.png);
             background-repeat: no-repeat;
             background-size: contain; */
@@ -42,8 +42,8 @@
         }
 
         .door {
-            background-color: rgb(25 185 45);
-            /* background-image: url(./images/door.png);
+            /* background-color: rgb(25 185 45);
+            background-image: url(./images/door.png);
             background-repeat: no-repeat;
             background-size: contain; */
         }
@@ -62,6 +62,39 @@
             background-size: contain; */
         }
     </style>
+    <style>
+        .movers {
+            display: flex;
+            gap: .25rem;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem auto;
+            width: fit-content;
+        }
+        .movers_vertical {
+            display:flex;
+            flex-direction: column;
+            gap: .25rem;
+        }
+        .movers button {
+            color: darkblue;
+            border: 2px solid currentColor;
+            background-color: white;
+            font-size: 1.5rem;
+            padding: .25rem;
+            aspect-ratio: 1;
+            width: 4ch;
+            border-radius: .5rem;
+            transition: color linear 200ms, background-color linear 200ms;
+        }
+        .movers button:hover {
+            color: white;
+            border: 2px solid darkblue;
+            background-color: darkblue;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,42 +103,48 @@
     </header>
 
     <main>
+        <div class="movers">
+            <button id="move-left">&larr;</button>
+            <div class="movers_vertical">
+                <button id="move-up">&uarr;</button>
+                <button id="move-down">&darr;</button>
+            </div>
+            <button id="move-right">&rarr;</button>
+        </div>
         <div class="board">
             <!-- erste reihe -->
-            <div class="cell hero"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+            <div data-row="0" data-col="0" class="cell hero"></div>
+            <div data-row="0" data-col="1" class="cell"></div>
+            <div data-row="0" data-col="2" class="cell"></div>
+            <div data-row="0" data-col="3" class="cell"></div>
+            <div data-row="0" data-col="4" class="cell"></div>
             <!-- zweite reihe -->
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+            <div data-row="1" data-col="0" class="cell"></div>
+            <div data-row="1" data-col="1" class="cell"></div>
+            <div data-row="1" data-col="2" class="cell"></div>
+            <div data-row="1" data-col="3" class="cell"></div>
+            <div data-row="1" data-col="4" class="cell"></div>
             <!-- dritte reihe -->
-            <div class="cell"></div>
-            <div class="cell wall"></div>
-            <div class="cell wall"></div>
-            <div class="cell"></div>
-            <div class="cell wall"></div>
+            <div data-row="2" data-col="0" class="cell"></div>
+            <div data-row="2" data-col="1" class="cell wall"></div>
+            <div data-row="2" data-col="2" class="cell wall"></div>
+            <div data-row="2" data-col="3" class="cell"></div>
+            <div data-row="2" data-col="4" class="cell wall"></div>
             <!-- vierte reihe -->
-            <div class="cell"></div>
-            <div class="cell wall"></div>
-            <div class="cell"></div>
-            <div class="cell monster-2"></div>
-            <div class="cell"></div>
+            <div data-row="3" data-col="0" class="cell"></div>
+            <div data-row="3" data-col="1" class="cell wall"></div>
+            <div data-row="3" data-col="2" class="cell"></div>
+            <div data-row="3" data-col="3" class="cell monster-2"></div>
+            <div data-row="3" data-col="4" class="cell"></div>
             <!-- fünfte reihe -->
-            <div class="cell wall"></div>
-            <div class="cell wall"></div>
-            <div class="cell monster-1"></div>
-            <div class="cell"></div>
-            <div class="cell door"></div>
-
+            <div data-row="4" data-col="0" class="cell wall"></div>
+            <div data-row="4" data-col="1" class="cell wall"></div>
+            <div data-row="4" data-col="2" class="cell monster-1"></div>
+            <div data-row="4" data-col="3" class="cell"></div>
+            <div data-row="4" data-col="4" class="cell door"></div>
         </div>
     </main>
 
-    <script src="./assets/scripts/app.js"></script>
 </body>
 
 </html>
