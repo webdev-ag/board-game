@@ -95,6 +95,67 @@
             cursor: pointer;
         }
     </style>
+<style>
+    fieldset {
+        border: none;
+    }
+    .tag-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 300px;
+        border: 1px solid black;
+        margin-inline: auto;
+        margin-block: 1rem;
+        padding: 1rem 2rem;
+    }
+    .error {
+        display: none;
+        padding: 0.25rem 0.125rem;
+        color: darkred;
+        font-weight: bold;
+    }
+    .error::before {
+        content: "Error: "
+    }
+    .result {
+        display: none;
+        color: darkgreen;
+        padding: 0.25rem 0.125rem;
+    }
+    #tag-result::before {
+        content: "Gamer Tag: "
+    }
+    .tooltip {
+        display: inline-block;
+        position: relative;
+        color: darkblue;
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        aspect-ratio: 1;
+        height: 1.25ch;
+        text-align: center;
+        padding: .125em;
+    }
+    .tooltip .message {
+        display: none;
+        position: absolute;
+        transform: translateY(-100%);
+        top: 0;
+        right: 0;
+        background-color: silver;
+        padding: 0.25em;
+        color: black;
+        font-size: 0.75em;
+        font-weight: normal;
+        width: auto;
+        max-width: 300px;
+    }
+    .tooltip:hover .message {
+        display: initial;
+    }
+</style>
 </head>
 
 <body>
@@ -143,8 +204,69 @@
             <div data-row="4" data-col="3" class="cell"></div>
             <div data-row="4" data-col="4" class="cell door"></div>
         </div>
+
+        <form class="tag-form" action="#">
+            <fieldset>
+                <label>
+                    Player Tag<span class="tooltip">*
+                        <div class="message">Max. Länge 20 Zeichen, nur Buchstaben, Zahlen, und - _ . # erlaubt</div>
+                    </span>
+                    <input type="text" id="player-tag" />
+                </label>
+                <div class="error" id="tag-error"></div>
+            </fieldset>
+            <div>
+                <button id="check-tag">Check Tag</button>
+            </div>
+            <div class="result" id="tag-result"></div>
+        </form>
+
     </main>
 
+    <script>
+        /*
+            erste Aufgabe:
+            lass den Benutzer über einen Prompt seinen Name eingeben und speichere ihn in einer Variable, zB so
+                let name = window.prompt('Bitte gib Deinen Namen ein');
+            Ist der Name, der eingegeben wurde Dein Name, gib mit einem alert "Hi!" aus. Wird ein anderer Name eingegeben,
+            dann gib mit dem Alert "Guten Tag <name>!" aus
+                alert("Hi");
+                alert("Guten Tag" + name + "!")
+        */
+    </script>
+    <script>
+        /*
+            zweite Aufgabe:
+            Erstelle einen Array listOfCities
+                let listOfCities = [ 'Offenbach', 'Frankfurt', 'Hanau', 'Wiesbaden' ];
+            a) lasse über ein console.log() den gesamten Array in der Konsole [F12] insgesamt ausgeben
+            b) Dann nur die zweite Stadt per console.log()
+            c) Dann nur die letzte Stadt.
+            d) Frage den User nach einer Stadt per prompt und füge diese Stadt in den Array hinzu und lasse ihn dann gesamt per
+                console.log ausgeben
+            e) wie können wir immer nur das letzte Element ausgeben?
+        */
+    </script>
+
+    <script>
+        /*
+            dritte Aufgabe
+            Lege einen Array von bereits belegten gamer tags an, z.B.
+                let tags = [ 'Barf.Bear', 'Punjab-Killer', 'Baki' ];
+            Lass den User einen Gamer Tag wählen.
+            Beim Klick auf den Button "Check Tag" wird geprüft:
+                - der Name darf nur 20 Zeichen lang sein, Zeige in einem Alert
+                    den Fehler "Der gewählte Name ist zu lang. Max. 20 Zeichen!"
+                - der Name darf nicht in der Liste der bereits vorhandenen Namen sein.
+                    Zeige in einem Alert den Fehler "Der Name ist bereits vergeben. Bitte wähle einen anderen Namen"
+                - wenn der Name ok ist, füge ih in die Liste hinzu und leere das input Feld
+            Zugriff auf das Feld mit
+                const tagInput = document.querySelector('#player-tag');
+                const tagButton = document.querySelector('#check-tag');
+                const tagError = document.querySelector('tag-error');
+                const tagResult = document.querySelector('tag-result');
+        */
+    </script>
 </body>
 
 </html>
