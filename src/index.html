@@ -28,10 +28,11 @@
         }
 
         .hero {
-            background-color: rgb(255 0 0 / .75);
-            /* background-image: url(./images/hero-m.png);
+            /* background-color: rgb(255 0 0 / .75); */
+            background-image: url(./images/hero-m.png);
             background-repeat: no-repeat;
-            background-size: contain; */
+            background-size: contain;
+            transition: grid-area linear 1550ms;
         }
 
         .wall {
@@ -172,40 +173,22 @@
             </div>
             <button id="move-right">&rarr;</button>
         </div>
-        <div class="board">
-            <!-- erste reihe -->
-            <div data-row="0" data-col="0" class="cell hero"></div>
-            <div data-row="0" data-col="1" class="cell"></div>
-            <div data-row="0" data-col="2" class="cell"></div>
-            <div data-row="0" data-col="3" class="cell"></div>
-            <div data-row="0" data-col="4" class="cell"></div>
-            <!-- zweite reihe -->
-            <div data-row="1" data-col="0" class="cell"></div>
-            <div data-row="1" data-col="1" class="cell"></div>
-            <div data-row="1" data-col="2" class="cell"></div>
-            <div data-row="1" data-col="3" class="cell"></div>
-            <div data-row="1" data-col="4" class="cell"></div>
-            <!-- dritte reihe -->
-            <div data-row="2" data-col="0" class="cell"></div>
-            <div data-row="2" data-col="1" class="cell wall"></div>
-            <div data-row="2" data-col="2" class="cell wall"></div>
-            <div data-row="2" data-col="3" class="cell"></div>
-            <div data-row="2" data-col="4" class="cell wall"></div>
-            <!-- vierte reihe -->
-            <div data-row="3" data-col="0" class="cell"></div>
-            <div data-row="3" data-col="1" class="cell wall"></div>
-            <div data-row="3" data-col="2" class="cell"></div>
-            <div data-row="3" data-col="3" class="cell monster-2"></div>
-            <div data-row="3" data-col="4" class="cell"></div>
-            <!-- fünfte reihe -->
-            <div data-row="4" data-col="0" class="cell wall"></div>
-            <div data-row="4" data-col="1" class="cell wall"></div>
-            <div data-row="4" data-col="2" class="cell monster-1"></div>
-            <div data-row="4" data-col="3" class="cell"></div>
-            <div data-row="4" data-col="4" class="cell door"></div>
+        <div class="board" style="isolation: isolate;">
+            <script>
+                for (let r of [1, 2, 3, 4, 5]) {
+                    for (let c  of [1, 2, 3, 4, 5]) {
+                        document.writeln(`            <div class="cell" style="grid-row:${r};grid-column:${c}"></div>`);
+                    }
+                }
+            </script>
+
+            <div class="hero cell" style="grid-column: 3/4; grid-row:2/3;position:relative;z-index:2"></div>
         </div>
 
         <form class="tag-form" action="#">
+            <section>Online sind:
+                <p id="players-online"></p>
+            </section>
             <fieldset>
                 <label>
                     Player Tag<span class="tooltip">*
@@ -252,7 +235,7 @@
         /*
             dritte Aufgabe
             Lege einen Array von bereits belegten gamer tags an, z.B.
-                let tags = [ 'Barf.Bear', 'Punjab-Killer', 'Baki' ];
+                let gamerTags = [ 'Barf.Bear', 'Punjab-Killer', 'Baki' ];
             Lass den User einen Gamer Tag wählen.
             Beim Klick auf den Button "Check Tag" wird geprüft:
                 - der Name darf nur 20 Zeichen lang sein, Zeige in einem Alert
@@ -263,9 +246,13 @@
             Zugriff auf das Feld mit
                 const tagInput = document.querySelector('#player-tag');
                 const tagButton = document.querySelector('#check-tag');
-                const tagError = document.querySelector('tag-error');
-                const tagResult = document.querySelector('tag-result');
+                const tagError = document.querySelector('#tag-error');
+                const tagResult = document.querySelector('#tag-result');
+                const tagPlayersOnline = document.querySelector('#players-online');
         */
+        let gamerTags = ['Barf.Bear', 'Punjab-Killer', 'Baki', 'OmaHeini'];
+        const tagPlayersOnline = document.querySelector('#players-online');
+        tagPlayersOnline.innerText = gamerTags;
     </script>
 </body>
 
