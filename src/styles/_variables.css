@@ -1,0 +1,29 @@
+:root {
+    --c-red: #FF0000;
+    --c-orange: #ff8800;
+    --c-blue: #0000FF;
+    --c-lightblue: #AADDFF;
+    --c-green: #00AA00;
+    --c-lightgreen: #88FF88;
+    --c-yellow: #FFFF00;
+    --c-purple: #FF00FF;
+    --c-grey: #929292;
+    --c-lightgrey: #d0d0d0;
+    --c-black: #202040;
+    --c-white: #F4F4FF;
+
+    --c-warning: var(--c-red);
+    --c-success: var(--c-green);
+    --c-info: var(--c-blue);
+
+    --s-sm: 4px;
+    --s-md: 8px;
+    --s-lg: 16px;
+    --s-xl: 24px;
+}
+
+/* game variables */
+:root {
+    --board-cols: 5;
+    --board-rows: 6;
+}

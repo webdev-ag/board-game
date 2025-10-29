@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board Game</title>
+
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Simple Board Game</h1>
+  </header>
+
+  <div class="main-wrapper">
+
+    <aside>
+      <form action="#test">
+        <fieldset>
+          <legend>Your Tag</legend>
+          <label>
+            <span>Gamertag</span>
+            <input type="text" name="gamertag" placeholder="your name" maxlength="16">
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Your Game</legend>
+          <label>
+            <span>Name of the Game</span>
+            <input type="text" name="gamename" placeholder="name your game" maxlength="32">
+          </label>
+        </fieldset>
+      </form>
+
+      <div class="movers">
+        <button class="move" id="move-left">&leftarrow;</button>
+        <div class="up-down">
+          <button class="move" id="move-up">&uparrow;</button>
+          <button class="move" id="move-down">&downarrow;</button>
+        </div>
+        <button class="move" id="move-right">&rightarrow;</button>
+      </div>
+    </aside>
+
+    <main>
+      <div id="game" class="board"></div>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>Built by dev@dschopper.de</p>
+  </footer>
+
+  <script type="module" src="./scripts/main.mjs"></script>
+</body>
+
+</html>

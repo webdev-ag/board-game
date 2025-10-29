@@ -1,0 +1,12 @@
+{
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "objectWrap": "preserve",
+  "printWidth": 120,
+  "htmlWhitespaceSensitivity": "strict",
+  "bracketSameLine": true,
+  "arrowParens": "always",
+  "experimentalOperatorPosition": "end"
+}

@@ -1,0 +1,29 @@
+body > * {
+    width: 80%;
+    min-width: 460px;
+    max-width: 1020px;
+    margin: auto;
+}
+
+header, footer {
+    background-color: var(--c-lightgrey);
+    padding: var(--s-sm) var(--s-lg);
+}
+
+main {
+    width: 80%;
+    min-width: 400px;
+    background-color: var(--c-lightgrey);
+}
+
+aside {
+    background-color: var(--c-lightgrey);
+}
+
+.main-wrapper {
+    padding: var(--s-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: var(--s-lg);
+}

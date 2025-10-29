@@ -1,0 +1,70 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+html, body {
+    width: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+fieldset {
+    display: block;
+    border: 2px solid var(--c-blue);
+    padding: var(--s-md);
+    > legend {
+        color: var(--c-blue);
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        margin: 0;
+        border-left: 2px solid var(--c-blue);
+        border-right: 2px solid var(--c-blue);
+        padding: 0 var(--s-md);
+    }
+    margin: var(--s-md) var(--s-sm);
+}
