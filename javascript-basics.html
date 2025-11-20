@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./src/styles/reset.css">
+  <link rel="stylesheet" href="./highlight-theme.css">
+  <style>
+    body {
+      background-color: grey;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: grid;
+      margin: 3rem 5rem;
+      gap: 1rem;
+      &>* {
+        background-color: white;
+        padding: 1rem 2rem;
+        width: 65%;
+        min-width: 400px;
+        max-width: 980px;
+      }
+    }
+    header {
+      text-align: center;
+    }
+  </style>
+  <title>JS Basics</title>
+</head>
+<body>
+  <header>
+    <p>JS Basics</p>
+  </header>
+  <main>
+    <h2>Erste JS Kommmandos</h2>
+    <ul>
+      <li>
+        Ein einzelnes Kommando endet immer mit einem
+        <pre><code class="language-javascript">
+        alert('Hallo');
+        </code></pre>
+      </li>
+      <li>
+        Wörter (Strings oder Zeichenketten) werden mit
+        <pre><code class="language-javascript">
+        "Hallo!"
+        'Dominik'</code></pre>
+        umschlossen
+      </li>
+      <li>
+        Variablen werden so definiert
+        <pre><code class="language-javascript">
+        const eineFrage = "was los?";
+        const eineZahl = 47.11;
+        let einWort = 'Wieso';
+        let eineAndereZahl = 2031;
+        </code></pre>
+      </li>
+      <li>
+        Ausgaben und testen von Ausgaben mit
+        <pre><code class="language-javascript">
+          console.log('Dieser Text wird ausgegeben')
+        </code></pre>
+      </li>
+      <li>Nummern werden einfach so mmit einem Punkt notiert
+        <pre><code class="language-javascript">
+        const eineKommazahl = 12.3
+        const eineGanzzahl = 99
+      </code></pre>
+      </li>
+      <li>
+        Wir können Unterscheidungen treffen
+        <pre><code class="language-javascript">
+          const einWort = prompt('Gib ein Wort ein');
+          if (einWort === 'hallo') {
+            alert('Du hast hallo eingegeben')
+          } else {
+            alert("Du hast etwas anderes eingegeben")
+          }
+        </code></pre>
+      </li>
+      <li>
+        Wir können auch Loops (deutsch Schleifen) bauen
+        <pre><code>
+          let zahl = 0;
+          while (zahl < 10) {
+            zahl = zahl + 1;
+            alert('Durchlauf nr' + zahl);
+          }
+        </code></pre>
+      </li>
+    </ul>
+  </main>
+
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/javascript.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>
