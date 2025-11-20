@@ -1,37 +1,84 @@
-const cols = 16;
-const rows = 20;
+import { boardMaps, mapOrder } from './maps/index.mjs';
 
-function drawBoard() {
+/**
+ *
+ * @returns {map: Array<string[]>, heroPos: { heroRow: number, heroCol: number }}
+ */
+function drawBoard(newMap = undefined) {
   const game = document.querySelector('#game');
 
   const rowsVariableName = '--board-rows';
   const colsVariableName = '--board-cols';
-  window.document.documentElement.style.setProperty(rowsVariableName, rows);
-  window.document.documentElement.style.setProperty(colsVariableName, cols);
 
-  renderCells(game, cols, rows);
+  const mapName = 'm1';
+  const map = newMap ?? boardMaps[mapName];
+
+  window.document.documentElement.style.setProperty(rowsVariableName, map.length);
+  window.document.documentElement.style.setProperty(colsVariableName, map[0].length);
+
+  const heroPos = renderMap(game, map);
+
+  return { map, heroPos };
 }
 
 /**
- *
  * @param {HTMLElement} insertHere
- * @param {number} cols
- * @param {number} rows
+ * @param {Array<string[]>} map
+ * @returns {{ heroRow: number, heroCol: number }}
  */
-function renderCells(insertHere, cols, rows) {
-  let cell;
-  for (let r = 0; r < rows; r += 1) {
-    for (let c = 0; c < cols; c += 1) {
-      cell = document.createElement('div');
-      cell.classList.add('cell');
-      cell.classList.add(`row-${r}`);
-      cell.classList.add(`col-${c}`);
-      if (r === 2 && c === 2) {
-        cell.classList.add('hero');
+function renderMap(insertHere, map) {
+  const heroPos = { heroRow: -1, heroCol: -1 };
+  for (const r in map) {
+    const row = map[r];
+    for (const c in row) {
+      const cell = row[c];
+      const cellElement = document.createElement('div');
+      insertHere.appendChild(cellElement);
+      cellElement.classList.add('cell');
+      if (cell === '#') {
+        cellElement.classList.add('wall');
+      } else if (cell === 'X') {
+        cellElement.classList.add('hero');
+        heroPos.heroRow = r;
+        heroPos.heroCol = c;
+      } else if (cell === 'E') {
+        cellElement.classList.add('door');
       }
-      insertHere.appendChild(cell);
     }
   }
+  return heroPos;
+}
+
+function moveHeroUp(heroPos, map) {
+  const { heroCol, heroRow } = heroPos;
+  const moveToCol = heroCol;
+  const moveToRow = heroRow - 1;
+  if (moveToRow - 1 < 0) {
+    return;
+  }
+  const goToCell = map[moveToRow][moveToCol];
+  if (goToCell === ' ') {
+    map[moveToRow][moveToCol] = 'X';
+    map[heroRow][heroCol] = 'E';
+  }
+  drawBoard(map);
+  return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
+}
+
+function moveHeroDown(heroPos, map) {
+  const { heroCol, heroRow } = heroPos;
+  const moveToCol = heroCol;
+  const moveToRow = heroRow + 1;
+  if (moveToRow + 1 >= map.length) {
+    return;
+  }
+  const goToCell = map[moveToRow][moveToCol];
+  if (goToCell === ' ') {
+    map[moveToRow][moveToCol] = 'X';
+    map[heroRow][heroCol] = 'E';
+  }
+  drawBoard(map);
+  return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
 }
 
 /**
@@ -44,45 +91,9 @@ function getCellByNo(col, row) {
   return document.querySelector(`.col-${col}.row-${row}`);
 }
 
-/**
- *
- * @returns {Record<'col'|'row'|'element',unknown>};
- */
-function findHeroPosition() {
-  const hero = document.querySelector('.hero');
-  let col = -1;
-  let row = -1;
-  hero.classList.forEach((className) => {
-    if (className.startsWith('col')) {
-      col = parseInt(className.split('-')[1]);
-    } else if (className.startsWith('row')) {
-      row = parseInt(className.split('-')[1]);
-    }
-  });
-  return { col, row, element: hero };
-}
-
 function setHeroPosition(col, row) {
   const cell = getCellByNo(col, row);
   cell.classList.add('hero');
-}
-
-function moveHeroUp() {
-  const { col, row, element } = findHeroPosition();
-  if (row - 1 < 0) {
-    return;
-  }
-  element.classList.remove('hero');
-  setHeroPosition(col, row - 1);
-}
-
-function moveHeroDown() {
-  const { col, row, element } = findHeroPosition();
-  if (row + 1 > rows) {
-    return;
-  }
-  element.classList.remove('hero');
-  setHeroPosition(col, row + 1);
 }
 
 function moveHeroLeft() {
@@ -103,10 +114,10 @@ function moveHeroRight() {
   setHeroPosition(col + 1, row);
 }
 
-drawBoard();
+const { map, heroPos } = drawBoard();
 
-document.querySelector('#move-up').addEventListener('click', () => moveHeroUp());
-document.querySelector('#move-down').addEventListener('click', () => moveHeroDown());
+document.querySelector('#move-up').addEventListener('click', () => moveHeroUp(map, heroPos));
+document.querySelector('#move-down').addEventListener('click', () => moveHeroDown(map, heroPos));
 
 document.querySelector('#move-left').addEventListener('click', () => moveHeroLeft());
 document.querySelector('#move-right').addEventListener('click', () => moveHeroRight());
@@ -122,4 +133,4 @@ document.addEventListener('keyup', (event) => {
   } else if (event.key === 'ArrowLeft') {
     moveHeroLeft();
   }
-})
+});

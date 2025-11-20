@@ -3,17 +3,24 @@
     display: grid;
     grid-template-columns: repeat(var(--board-cols), 1fr);
     grid-template-rows: repeat(var(--board-rows), 1fr);
-    border: 1px solid var(--c-grey);
+    border: 2px solid var(--c-grey);
     background-color: var(--c-white);
 
     .cell {
         aspect-ratio: 1;
         border: 1px solid var(--c-lightgrey);
-        background-color: var(--c-white);
     }
 
-    .hero {
+    .cell.hero {
         background-color: var(--c-green);
+    }
+
+    .cell.wall {
+        background-color: var(--c-grey);
+    }
+
+    .cell.door {
+        background-color: var(--c-orange);
     }
 }
 
