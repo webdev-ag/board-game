@@ -8,15 +8,17 @@
 
     <style>
         :root {
-            --cols: 5;
-            --rows: 5;
+            --board-cols: 5;
+            --board-rows: 5;
         }
 
         .board {
             display: grid;
-            grid-template-columns: repeat(var(--cols), 1fr);
-            grid-template-rows: repeat(var(--rows), 1fr);
-            width: 450px;
+            grid-template-columns: repeat(var(--board-cols), 1fr);
+            grid-template-rows: repeat(var(--board-rows), 1fr);
+            width: 90%;
+            max-width:1024px;
+            min-width:460px;
             gap: 1px;
             background-color: #333;
             margin: 0 auto;
@@ -36,17 +38,17 @@
         }
 
         .wall {
-            /* background-color: rgb(0 0 0);
+            background-color: rgb(0 0 0);
             background-image: url(./images/wall.png);
             background-repeat: no-repeat;
-            background-size: contain; */
+            background-size: contain;
         }
 
         .door {
-            /* background-color: rgb(25 185 45);
+            background-color: rgb(25 185 45);
             background-image: url(./images/door.png);
             background-repeat: no-repeat;
-            background-size: contain; */
+            background-size: contain;
         }
 
         .monster-1 {
@@ -173,87 +175,15 @@
             </div>
             <button id="move-right">&rarr;</button>
         </div>
-        <div class="board" style="isolation: isolate;">
-            <script>
-                for (let r of [1, 2, 3, 4, 5]) {
-                    for (let c  of [1, 2, 3, 4, 5]) {
-                        document.writeln(`            <div class="cell" style="grid-row:${r};grid-column:${c}"></div>`);
-                    }
-                }
-            </script>
 
-            <div class="hero cell" style="grid-column: 3/4; grid-row:2/3;position:relative;z-index:2"></div>
+        <div id="game" class="board" style="isolation: isolate;">
+
         </div>
-
-        <form class="tag-form" action="#">
-            <section>Online sind:
-                <p id="players-online"></p>
-            </section>
-            <fieldset>
-                <label>
-                    Player Tag<span class="tooltip">*
-                        <div class="message">Max. Länge 20 Zeichen, nur Buchstaben, Zahlen, und - _ . # erlaubt</div>
-                    </span>
-                    <input type="text" id="player-tag" />
-                </label>
-                <div class="error" id="tag-error"></div>
-            </fieldset>
-            <div>
-                <button id="check-tag">Check Tag</button>
-            </div>
-            <div class="result" id="tag-result"></div>
-        </form>
 
     </main>
 
-    <script>
-        /*
-            erste Aufgabe:
-            lass den Benutzer über einen Prompt seinen Name eingeben und speichere ihn in einer Variable, zB so
-                let name = window.prompt('Bitte gib Deinen Namen ein');
-            Ist der Name, der eingegeben wurde Dein Name, gib mit einem alert "Hi!" aus. Wird ein anderer Name eingegeben,
-            dann gib mit dem Alert "Guten Tag <name>!" aus
-                alert("Hi");
-                alert("Guten Tag" + name + "!")
-        */
-    </script>
-    <script>
-        /*
-            zweite Aufgabe:
-            Erstelle einen Array listOfCities
-                let listOfCities = [ 'Offenbach', 'Frankfurt', 'Hanau', 'Wiesbaden' ];
-            a) lasse über ein console.log() den gesamten Array in der Konsole [F12] insgesamt ausgeben
-            b) Dann nur die zweite Stadt per console.log()
-            c) Dann nur die letzte Stadt.
-            d) Frage den User nach einer Stadt per prompt und füge diese Stadt in den Array hinzu und lasse ihn dann gesamt per
-                console.log ausgeben
-            e) wie können wir immer nur das letzte Element ausgeben?
-        */
-    </script>
+    <script src="scripts/main.mjs" type="module"></script>
 
-    <script>
-        /*
-            dritte Aufgabe
-            Lege einen Array von bereits belegten gamer tags an, z.B.
-                let gamerTags = [ 'Barf.Bear', 'Punjab-Killer', 'Baki' ];
-            Lass den User einen Gamer Tag wählen.
-            Beim Klick auf den Button "Check Tag" wird geprüft:
-                - der Name darf nur 20 Zeichen lang sein, Zeige in einem Alert
-                    den Fehler "Der gewählte Name ist zu lang. Max. 20 Zeichen!"
-                - der Name darf nicht in der Liste der bereits vorhandenen Namen sein.
-                    Zeige in einem Alert den Fehler "Der Name ist bereits vergeben. Bitte wähle einen anderen Namen"
-                - wenn der Name ok ist, füge ih in die Liste hinzu und leere das input Feld
-            Zugriff auf das Feld mit
-                const tagInput = document.querySelector('#player-tag');
-                const tagButton = document.querySelector('#check-tag');
-                const tagError = document.querySelector('#tag-error');
-                const tagResult = document.querySelector('#tag-result');
-                const tagPlayersOnline = document.querySelector('#players-online');
-        */
-        let gamerTags = ['Barf.Bear', 'Punjab-Killer', 'Baki', 'OmaHeini'];
-        const tagPlayersOnline = document.querySelector('#players-online');
-        tagPlayersOnline.innerText = gamerTags;
-    </script>
 </body>
 
 </html>
