@@ -1,4 +1,5 @@
 import { boardMaps, mapOrder } from './maps/index.mjs';
+import { playThud } from './sounds.mjs';
 
 /**
  * @param {Array<Array<string>>|undefined} newMap
@@ -69,6 +70,8 @@ function moveHeroUp(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
+  } else if (goToCell === '#') {
+    playThud();
   }
   return {heroPos, map};
 }
@@ -93,6 +96,8 @@ function moveHeroDown(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
+  } else if (goToCell === '#') {
+    playThud();
   }
   return {heroPos, map};
 }
@@ -111,6 +116,8 @@ function moveHeroLeft(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
+  } else if (goToCell === '#') {
+    playThud();
   }
   return {heroPos, map};
 }
@@ -129,6 +136,8 @@ function moveHeroRight(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
+  } else if (goToCell === '#') {
+    playThud();
   }
   return {heroPos, map};
 }
