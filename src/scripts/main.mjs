@@ -61,7 +61,7 @@ function moveHeroUp(heroPos, map) {
   const { heroCol, heroRow } = heroPos;
   const moveToCol = heroCol;
   const moveToRow = heroRow - 1;
-    if (moveToRow - 1 < 0) {
+    if (moveToRow < 0) {
     return {heroPos, map};
   }
   const goToCell = map[moveToRow][moveToCol];
