@@ -1,6 +1,16 @@
 import { boardMaps, mapOrder } from './maps/index.mjs';
 import { playThud } from './sounds.mjs';
 
+let mapName = 'm1';
+
+function getNextMapName(exitName) {
+  mapName = mapOrder[mapName][exitName];
+  if (!mapName) {
+    throw new Error('cannot find map for exit:%o in map with name:%o', exitName, mapName);
+  }
+  return mapName;
+}
+
 /**
  * @param {Array<Array<string>>|undefined} newMap
  * @returns {map: Array<string[]>, heroPos: { heroRow: number, heroCol: number }}
@@ -11,7 +21,6 @@ function drawGame(newMap = undefined) {
   const rowsVariableName = '--board-rows';
   const colsVariableName = '--board-cols';
 
-  const mapName = 'm1';
   const map = newMap ?? boardMaps[mapName];
 
   window.document.documentElement.style.setProperty(rowsVariableName, map.length);
@@ -21,6 +30,7 @@ function drawGame(newMap = undefined) {
 
   return { map, heroPos };
 }
+
 
 /**
  * @param {HTMLElement} insertHere
@@ -58,6 +68,7 @@ function renderMap(insertHere, map) {
  * @returns
  */
 function moveHeroUp(heroPos, map) {
+  //debugger;
   const { heroCol, heroRow } = heroPos;
   const moveToCol = heroCol;
   const moveToRow = heroRow - 1;
@@ -70,7 +81,11 @@ function moveHeroUp(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
-  } else if (goToCell === '#') {
+  }else if (goToCell === 'E') {
+    getNextMapName(goToCell);
+    const newMap = boardMaps[mapName]
+    return drawGame(newMap);
+  }  else if (goToCell === '#') {
     playThud();
   }
   return {heroPos, map};
@@ -83,6 +98,7 @@ function moveHeroUp(heroPos, map) {
  * @returns
  */
 function moveHeroDown(heroPos, map) {
+  //debugger;
   const { heroCol, heroRow } = heroPos;
   const moveToCol = Number(heroCol);
   const moveToRow = Number(heroRow) + 1;
@@ -96,13 +112,18 @@ function moveHeroDown(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
-  } else if (goToCell === '#') {
+  }else if (goToCell === 'E') {
+    getNextMapName(goToCell);
+    const newMap = boardMaps[mapName]
+    return drawGame(newMap);
+  }  else if (goToCell === '#') {
     playThud();
   }
   return {heroPos, map};
 }
 
 function moveHeroLeft(heroPos, map) {
+  //debugger;
   const { heroCol, heroRow } = heroPos;
   const moveToCol = Number(heroCol) - 1;
   const moveToRow = Number(heroRow);
@@ -116,6 +137,10 @@ function moveHeroLeft(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
+  } else if (goToCell === 'E') {
+    getNextMapName(goToCell);
+    const newMap = boardMaps[mapName]
+    return drawGame(newMap);
   } else if (goToCell === '#') {
     playThud();
   }
@@ -123,10 +148,11 @@ function moveHeroLeft(heroPos, map) {
 }
 
 function moveHeroRight(heroPos, map) {
+  // debugger;
   const { heroCol, heroRow } = heroPos;
   const moveToCol = Number(heroCol) + 1;
   const moveToRow = Number(heroRow);
-    if (moveToCol + 1 > map[moveToRow].length) {
+  if (moveToCol + 1 > map[moveToRow].length) {
     return {heroPos, map};
   }
 
@@ -136,7 +162,11 @@ function moveHeroRight(heroPos, map) {
     map[heroRow][heroCol] = ' ';
     drawGame(map);
     return { map, heroPos: { heroRow: moveToRow, heroCol: moveToCol } };
-  } else if (goToCell === '#') {
+  } else if (goToCell === 'E') {
+    getNextMapName(goToCell);
+    const newMap = boardMaps[mapName]
+    return drawGame(newMap);
+  }  else if (goToCell === '#') {
     playThud();
   }
   return {heroPos, map};
@@ -159,24 +189,28 @@ function setHeroPosition(col, row) {
 
 let { map, heroPos } = drawGame();
 
-document.querySelector('#move-up').addEventListener('click', () => {
+const btnUp = document.querySelector('#move-up');
+btnUp.addEventListener('click', () => {
   const newData = moveHeroUp(heroPos,map)
   map = newData.map;
   heroPos = newData.heroPos;
 });
-document.querySelector('#move-down').addEventListener('click', () => {
+const btnDown = document.querySelector('#move-down');
+btnDown.addEventListener('click', () => {
   const newData = moveHeroDown(heroPos,map);
   map = newData.map;
   heroPos = newData.heroPos;
 });
 
-document.querySelector('#move-left').addEventListener('click', () => {
+const btnLeft = document.querySelector('#move-left');
+btnLeft.addEventListener('click', () => {
   const newData = moveHeroLeft(heroPos,map);
   map = newData.map;
   heroPos = newData.heroPos;
 });
 
-document.querySelector('#move-right').addEventListener('click', () => {
+const btnRight = document.querySelector('#move-right');
+btnRight.addEventListener('click', () => {
   const newData = moveHeroRight(heroPos,map)
   map = newData.map;
   heroPos = newData.heroPos;
@@ -185,20 +219,20 @@ document.querySelector('#move-right').addEventListener('click', () => {
 document.addEventListener('keyup', (event) => {
   event.preventDefault();
   if (event.key === 'ArrowDown') {
-    const newData = moveHeroDown(heroPos,map);
-    map = newData.map;
-    heroPos = newData.heroPos;
+    btnDown.focus();
+    btnDown.click();
+    window.setTimeout(() => btnDown.blur(), 500);
   } else if (event.key === 'ArrowUp') {
-    const newData = moveHeroUp(heroPos,map)
-    map = newData.map;
-    heroPos = newData.heroPos;
+    btnUp.focus();
+    btnUp.click();
+    window.setTimeout(() => btnUp.blur(), 500);
   } else if (event.key === 'ArrowRight') {
-    const newData = moveHeroRight(heroPos,map)
-    map = newData.map;
-    heroPos = newData.heroPos;
+    btnRight.focus();
+    btnRight.click();
+    window.setTimeout(() => btnRight.blur(), 500);
   } else if (event.key === 'ArrowLeft') {
-      const newData = moveHeroLeft(heroPos,map);
-      map = newData.map;
-      heroPos = newData.heroPos;
+    btnLeft.focus();
+    btnLeft.click();
+    window.setTimeout(() => btnLeft.blur(), 500);
   }
 });

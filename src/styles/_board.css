@@ -45,11 +45,15 @@
         padding: var(--s-md);
         font-size: 1.25rem;
         font-weight: bold;
-        &:hover {
+        transition: 300ms linear background-color;
+        &:hover,
+        &:active,
+        &:focus {
             color: var(--c-red);
             border: 3px solid var(--c-red);
             outline: 2px solid var(--c-orange);
             background-color: var(--c-grey);
+            transition: 300ms linear background-color;
         }
     }
 }
