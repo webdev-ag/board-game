@@ -21,7 +21,7 @@ function drawGame(newMap = undefined) {
   const rowsVariableName = '--board-rows';
   const colsVariableName = '--board-cols';
 
-  const map = newMap ?? boardMaps[mapName];
+  const map = structuredClone(newMap) ?? structuredClone(boardMaps[mapName]);
 
   window.document.documentElement.style.setProperty(rowsVariableName, map.length);
   window.document.documentElement.style.setProperty(colsVariableName, map[0].length);
