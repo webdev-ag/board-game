@@ -8,7 +8,7 @@
 
     <style>
         :root {
-            --cols: 5;
+            --cols: 10;
             --rows: 5;
         }
 
@@ -36,31 +36,31 @@
         }
 
         .wall {
-            /* background-color: rgb(0 0 0);
+            background-color: rgb(0 0 0);
             background-image: url(./images/wall.png);
             background-repeat: no-repeat;
-            background-size: contain; */
+            background-size: contain;
         }
 
         .door {
-            /* background-color: rgb(25 185 45);
+            background-color: rgb(25 185 45);
             background-image: url(./images/door.png);
             background-repeat: no-repeat;
-            background-size: contain; */
+            background-size: contain;
         }
 
         .monster-1 {
-            /* background-color: rgb(150 150 50);
+            background-color: rgb(150 150 50);
             background-image: url(./images/wolf.png);
             background-repeat: no-repeat;
-            background-size: contain; */
+            background-size: contain;
         }
 
         .monster-2 {
-            /* background-color: rgb(150 50 50);
+            background-color: rgb(150 50 50);
             background-image: url(./images/orc.png);
             background-repeat: no-repeat;
-            background-size: contain; */
+            background-size: contain;
         }
     </style>
     <style>
@@ -73,11 +73,13 @@
             margin: 1rem auto;
             width: fit-content;
         }
+
         .movers_vertical {
-            display:flex;
+            display: flex;
             flex-direction: column;
             gap: .25rem;
         }
+
         .movers button {
             color: darkblue;
             border: 2px solid currentColor;
@@ -89,6 +91,7 @@
             border-radius: .5rem;
             transition: color linear 200ms, background-color linear 200ms;
         }
+
         .movers button:hover {
             color: white;
             border: 2px solid darkblue;
@@ -96,67 +99,78 @@
             cursor: pointer;
         }
     </style>
-<style>
-    fieldset {
-        border: none;
-    }
-    .tag-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        width: 300px;
-        border: 1px solid black;
-        margin-inline: auto;
-        margin-block: 1rem;
-        padding: 1rem 2rem;
-    }
-    .error {
-        display: none;
-        padding: 0.25rem 0.125rem;
-        color: darkred;
-        font-weight: bold;
-    }
-    .error::before {
-        content: "Error: "
-    }
-    .result {
-        display: none;
-        color: darkgreen;
-        padding: 0.25rem 0.125rem;
-    }
-    #tag-result::before {
-        content: "Gamer Tag: "
-    }
-    .tooltip {
-        display: inline-block;
-        position: relative;
-        color: darkblue;
-        font-size: 1.2em;
-        font-weight: bold;
-        cursor: pointer;
-        aspect-ratio: 1;
-        height: 1.25ch;
+    <style>
+      body header h1 {
         text-align: center;
-        padding: .125em;
-    }
-    .tooltip .message {
-        display: none;
-        position: absolute;
-        transform: translateY(-100%);
-        top: 0;
-        right: 0;
-        background-color: silver;
-        padding: 0.25em;
-        color: black;
-        font-size: 0.75em;
-        font-weight: normal;
-        width: auto;
-        max-width: 300px;
-    }
-    .tooltip:hover .message {
-        display: initial;
-    }
-</style>
+      }
+        /* fieldset {
+            border: none;
+        }
+
+        .tag-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 300px;
+            border: 1px solid black;
+            margin-inline: auto;
+            margin-block: 1rem;
+            padding: 1rem 2rem;
+        }
+
+        .error {
+            display: none;
+            padding: 0.25rem 0.125rem;
+            color: darkred;
+            font-weight: bold;
+        }
+
+        .error::before {
+            content: "Error: "
+        }
+
+        .result {
+            display: none;
+            color: darkgreen;
+            padding: 0.25rem 0.125rem;
+        }
+
+        #tag-result::before {
+            content: "Gamer Tag: "
+        }
+
+        .tooltip {
+            display: inline-block;
+            position: relative;
+            color: darkblue;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            aspect-ratio: 1;
+            height: 1.25ch;
+            text-align: center;
+            padding: .125em;
+        }
+
+        .tooltip .message {
+            display: none;
+            position: absolute;
+            transform: translateY(-100%);
+            top: 0;
+            right: 0;
+            background-color: silver;
+            padding: 0.25em;
+            color: black;
+            font-size: 0.75em;
+            font-weight: normal;
+            width: auto;
+            max-width: 300px;
+        }
+
+        .tooltip:hover .message {
+            display: initial;
+        } */
+    </style>
 </head>
 
 <body>
@@ -166,93 +180,138 @@
 
     <main>
         <div class="movers">
-            <button id="move-left">&larr;</button>
+            <button onclick="moveHeroLeft(map); drawBoard(map)" id="move-left">&larr;</button>
             <div class="movers_vertical">
-                <button id="move-up">&uarr;</button>
-                <button id="move-down">&darr;</button>
+                <button onclick="moveHeroUp(map); drawBoard(map)" id="move-up">&uarr;</button>
+                <button onclick="moveHeroDown(map); drawBoard(map)" id="move-down">&darr;</button>
             </div>
-            <button id="move-right">&rarr;</button>
+            <button onclick="moveHeroRight(map); drawBoard(map)" id="move-right">&rarr;</button>
         </div>
-        <div class="board" style="isolation: isolate;">
-            <script>
-                for (let r of [1, 2, 3, 4, 5]) {
-                    for (let c  of [1, 2, 3, 4, 5]) {
-                        document.writeln(`            <div class="cell" style="grid-row:${r};grid-column:${c}"></div>`);
-                    }
-                }
-            </script>
-
-            <div class="hero cell" style="grid-column: 3/4; grid-row:2/3;position:relative;z-index:2"></div>
-        </div>
-
-        <form class="tag-form" action="#">
-            <section>Online sind:
-                <p id="players-online"></p>
-            </section>
-            <fieldset>
-                <label>
-                    Player Tag<span class="tooltip">*
-                        <div class="message">Max. Länge 20 Zeichen, nur Buchstaben, Zahlen, und - _ . # erlaubt</div>
-                    </span>
-                    <input type="text" id="player-tag" />
-                </label>
-                <div class="error" id="tag-error"></div>
-            </fieldset>
-            <div>
-                <button id="check-tag">Check Tag</button>
-            </div>
-            <div class="result" id="tag-result"></div>
-        </form>
+        <div id="board" class="board" style="isolation: isolate;"></div>
 
     </main>
 
     <script>
-        /*
-            erste Aufgabe:
-            lass den Benutzer über einen Prompt seinen Name eingeben und speichere ihn in einer Variable, zB so
-                let name = window.prompt('Bitte gib Deinen Namen ein');
-            Ist der Name, der eingegeben wurde Dein Name, gib mit einem alert "Hi!" aus. Wird ein anderer Name eingegeben,
-            dann gib mit dem Alert "Guten Tag <name>!" aus
-                alert("Hi");
-                alert("Guten Tag" + name + "!")
-        */
-    </script>
-    <script>
-        /*
-            zweite Aufgabe:
-            Erstelle einen Array listOfCities
-                let listOfCities = [ 'Offenbach', 'Frankfurt', 'Hanau', 'Wiesbaden' ];
-            a) lasse über ein console.log() den gesamten Array in der Konsole [F12] insgesamt ausgeben
-            b) Dann nur die zweite Stadt per console.log()
-            c) Dann nur die letzte Stadt.
-            d) Frage den User nach einer Stadt per prompt und füge diese Stadt in den Array hinzu und lasse ihn dann gesamt per
-                console.log ausgeben
-            e) wie können wir immer nur das letzte Element ausgeben?
-        */
-    </script>
+        const map = [
+            // 0   1    2    3    4    5    6    7    8    9
+            ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'], // 0
+            ['#', ' ', ' ', ' ', ' ', '#', ' ', 'H', ' ', '#'], // 1
+            ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'], // 2
+            ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+            ['#', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+            ['#', ' ', '#', ' ', ' ', '#', '#', '#', ' ', '#'],
+            ['#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+            ['#', ' ', '#', ' ', ' ', ' ', ' ', ' ', 'M', '#'],
+            ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ];
 
-    <script>
-        /*
-            dritte Aufgabe
-            Lege einen Array von bereits belegten gamer tags an, z.B.
-                let gamerTags = [ 'Barf.Bear', 'Punjab-Killer', 'Baki' ];
-            Lass den User einen Gamer Tag wählen.
-            Beim Klick auf den Button "Check Tag" wird geprüft:
-                - der Name darf nur 20 Zeichen lang sein, Zeige in einem Alert
-                    den Fehler "Der gewählte Name ist zu lang. Max. 20 Zeichen!"
-                - der Name darf nicht in der Liste der bereits vorhandenen Namen sein.
-                    Zeige in einem Alert den Fehler "Der Name ist bereits vergeben. Bitte wähle einen anderen Namen"
-                - wenn der Name ok ist, füge ih in die Liste hinzu und leere das input Feld
-            Zugriff auf das Feld mit
-                const tagInput = document.querySelector('#player-tag');
-                const tagButton = document.querySelector('#check-tag');
-                const tagError = document.querySelector('#tag-error');
-                const tagResult = document.querySelector('#tag-result');
-                const tagPlayersOnline = document.querySelector('#players-online');
-        */
-        let gamerTags = ['Barf.Bear', 'Punjab-Killer', 'Baki', 'OmaHeini'];
-        const tagPlayersOnline = document.querySelector('#players-online');
-        tagPlayersOnline.innerText = gamerTags;
+        function findHeroInRow(row /* ['#', ' ', ' ', ' ', ' ', '#', ' ', 'H', ' ', '#']  */) {
+            let colfound = 0;
+            for (let col of row) {
+                if (col === 'H') {
+                    return colfound;
+                }
+                colfound = colfound + 1;
+            }
+            return undefined;
+        }
+
+        function findHeroInMap(map) {
+            let rowFound  = 0;
+            for (let row of map) {
+                const col = findHeroInRow(row);
+                if (col !== undefined) {
+                    return { 'col': col, 'row': rowFound };
+                }
+                rowFound = rowFound + 1;
+            }
+        }
+
+        function moveHeroRight(map) {
+            const heroPosition = findHeroInMap(map);
+            const nextCell = map[heroPosition.row][heroPosition.col + 1];
+            if (nextCell === ' ') {
+                map[heroPosition.row][heroPosition.col] = ' ';
+                map[heroPosition.row][heroPosition.col + 1] = 'H';
+            }
+            return map;
+        }
+
+
+        function moveHeroLeft(map) {
+            const heroPosition = findHeroInMap(map);
+            const nextCell = map[heroPosition.row][heroPosition.col - 1];
+            if (nextCell === ' ') {
+                map[heroPosition.row][heroPosition.col] = ' ';
+                map[heroPosition.row][heroPosition.col - 1] = 'H';
+            }
+            return map;
+        }
+
+
+        function moveHeroDown(map) {
+            const heroPosition = findHeroInMap(map);
+            const nextCell = map[heroPosition.row + 1][heroPosition.col];
+            if (nextCell === ' ') {
+                map[heroPosition.row][heroPosition.col] = ' ';
+                map[heroPosition.row + 1][heroPosition.col] = 'H';
+            }
+            return map;
+        }
+
+        function moveHeroUp(map) {
+            const heroPosition = findHeroInMap(map);
+            const nextCell = map[heroPosition.row - 1][heroPosition.col];
+            if (nextCell === ' ') {
+                map[heroPosition.row][heroPosition.col] = ' ';
+                map[heroPosition.row - 1][heroPosition.col] = 'H';
+            }
+            return map;
+        }
+
+
+        function drawBoard(mapToDraw) {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+
+            for (let row of mapToDraw) {
+                for (let cell of row) {
+                    const htmlCell = document.createElement('div');
+                    htmlCell.classList.add('cell');
+                    if (cell === '#') {
+                        htmlCell.classList.add('wall');
+                    }
+                    if (cell === 'M') {
+                        htmlCell.classList.add('monster-1');
+                    }
+                    if (cell === 'H') {
+                        htmlCell.classList.add('hero');
+                    }
+                    // fertige zelle hinzufügen
+                    board.appendChild(htmlCell);
+                }
+            }
+
+        }
+
+        drawBoard(map);
+
+        document.addEventListener('keyup', function (event) {
+            if(event.key === 'ArrowLeft') {
+                moveHeroLeft(map);
+                drawBoard(map)
+            } else if (event.key === 'ArrowRight') {
+                moveHeroRight(map);
+                drawBoard(map)
+            } else if (event.key === 'ArrowUp') {
+                moveHeroUp(map);
+                drawBoard(map)
+            } else if (event.key === 'ArrowDown') {
+                moveHeroDown(map);
+                drawBoard(map)
+            }
+        });
+
     </script>
 </body>
 
